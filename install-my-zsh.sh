@@ -15,7 +15,7 @@ tar -xzf "$REPO_DIR/oh-my-zsh.tar.gz" -C "$REPO_DIR"
 
 echo "[*] Replacing ~/.oh-my-zsh with your custom version..."
 rm -rf "$TARGET_HOME/.oh-my-zsh"
-cp "$REPO_DIR/oh-my-zsh" "$TARGET_HOME/.oh-my-zsh"
+cp "$REPO_DIR/.oh-my-zsh" "$TARGET_HOME/.oh-my-zsh"
 
 echo "[*] Copying your zshrc as ~/.zshrc..."
 cp "$REPO_DIR/zshrc" "$TARGET_HOME/.zshrc"
