@@ -31,6 +31,9 @@ if ! command_exists zsh; then
         exit 1
     fi
 else
+    echo "[*] zsh is already installed."
+fi
+
 echo "[*] Installing Oh My Zsh (base) if not present..."
 if [ ! -d "$TARGET_HOME/.oh-my-zsh" ]; then
     RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -41,7 +44,7 @@ tar -xzf "$REPO_DIR/oh-my-zsh.tar.gz" -C "$REPO_DIR"
 
 echo "[*] Replacing ~/.oh-my-zsh with your custom version..."
 rm -rf "$TARGET_HOME/.oh-my-zsh"
-cp "$REPO_DIR/.oh-my-zsh" "$TARGET_HOME/.oh-my-zsh"
+mv "$REPO_DIR/oh-my-zsh" "$TARGET_HOME/.oh-my-zsh"
 
 echo "[*] Copying your zshrc as ~/.zshrc..."
 cp "$REPO_DIR/zshrc" "$TARGET_HOME/.zshrc"
@@ -49,5 +52,4 @@ cp "$REPO_DIR/zshrc" "$TARGET_HOME/.zshrc"
 echo "[*] Setting default shell to zsh for user $USER..."
 chsh -s "$(which zsh)" "$USER"
 
-echo "[✔] Done. You can start zsh now or log out and back in."
-
+echo "[✔] Done. Open a new terminal or run 'zsh' to use it."
