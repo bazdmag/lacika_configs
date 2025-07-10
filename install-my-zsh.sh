@@ -15,7 +15,7 @@ if ! command_exists zsh; then
     echo "[!] zsh not found. Installing..."
 
     if command_exists apt; then
-        sudo apt update && sudo apt install -y zsh
+        sudo apt install -y zsh
     elif command_exists dnf; then
         sudo dnf install -y zsh
     elif command_exists pacman; then
