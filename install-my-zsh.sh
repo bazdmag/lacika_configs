@@ -5,6 +5,29 @@ set -e
 REPO_DIR="$(pwd)"
 TARGET_HOME="$HOME"
 
+# Function: Check if command exists
+command_exists() {
+    command -v "$1" &> /dev/null
+}
+
+echo "[*] Checking for zsh..."
+if ! command_exists zsh; then
+    echo "[!] zsh not found. Installing..."
+
+    if command_exists apt; then
+        sudo apt update && sudo apt install -y zsh
+    elif command_exists dnf; then
+        sudo dnf install -y zsh
+    elif command_exists pacman; then
+        sudo pacman -Sy --noconfirm zsh
+    else
+        echo "[!] Package manager not recognized. Please install zsh manually."
+        exit 1
+    fi
+else
+    echo "[*] zsh is already installed."
+fi
+
 echo "[*] Installing Oh My Zsh (base) if not present..."
 if [ ! -d "$TARGET_HOME/.oh-my-zsh" ]; then
     RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
