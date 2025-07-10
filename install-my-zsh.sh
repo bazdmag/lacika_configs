@@ -24,10 +24,13 @@ if ! command_exists zsh; then
         echo "[!] Package manager not recognized. Please install zsh manually."
         exit 1
     fi
-else
-    echo "[*] zsh is already installed."
-fi
 
+    # Re-check if zsh is actually installed now
+    if ! command_exists zsh; then
+        echo "[✘] Zsh installation failed or zsh not found in PATH. Exiting."
+        exit 1
+    fi
+else
 echo "[*] Installing Oh My Zsh (base) if not present..."
 if [ ! -d "$TARGET_HOME/.oh-my-zsh" ]; then
     RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
